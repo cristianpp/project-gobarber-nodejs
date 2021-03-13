@@ -1,8 +1,8 @@
-import { subDays } from "date-fns";
 import { NextFunction } from "express";
 import { Request, Response } from 'express';
 import { verify } from 'jsonwebtoken';
 import authConfig from '../config/auth';
+import AppError from '../errors/AppError';
 
 
 interface TokenPayload {
@@ -39,7 +39,7 @@ if (!authHeader){
    return next();
 
  }catch(err){
-   throw new Error('Invalid JWT token');
+   throw new AppError('Invalid JWT token', 401);
  }
  
 }
